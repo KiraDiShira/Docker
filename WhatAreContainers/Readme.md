@@ -1,3 +1,5 @@
+# What are containers?
+
 ## The Bad Old Days
 
 The business needs a new application, so IT needs to go and procure a new server to run it on, and of course that server's got an upfront CapEx cost plus a bunch of OPEX costs that kick in later, things like the cost of powering and cooling it, administrating it, all of that stuff.
@@ -17,6 +19,8 @@ Instead of dedicating one physical server to one lonely app, suddenly we could s
 But, and there's always a but, it's not a perfect solution. Of course it's not.
 
 ## VMwarts
+
+<img src="https://github.com/KiraDiShira/Docker/blob/master/WhatAreContainers/Images/wac1.PNG" />
 
 In the hypervisor virtualization model we take a single physical server. It's got processes, memory, disk space, all of that stuff, and we know we can run loads of apps on it. 
 
