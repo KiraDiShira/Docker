@@ -41,3 +41,7 @@ It exposes an API, it interfaces with all the kernel magic, and out pop containe
 <img src="https://github.com/KiraDiShira/Docker/blob/master/ArchitectureAndTheory/Images/aat4.PNG" />
 
 <img src="https://github.com/KiraDiShira/Docker/blob/master/ArchitectureAndTheory/Images/aat5.PNG" />
+
+## Windows container
+
+<img src="https://github.com/KiraDiShira/Docker/blob/master/ArchitectureAndTheory/Images/aat6.PNG" />
