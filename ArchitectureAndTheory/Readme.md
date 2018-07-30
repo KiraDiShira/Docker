@@ -33,3 +33,11 @@ Control Groups that are, say, okay, Container A over here is only going to get t
 With these two technologies, Namespace and Control Groups, we have got a realistic shot at workable containers in a union file system, or some way of combining a bunch of read-only file systems or blocked devices, lashing away to the layer on top, and presenting to the system as a unified view. 
 
 <img src="https://github.com/KiraDiShira/Docker/blob/master/ArchitectureAndTheory/Images/aat3.PNG" />
+
+## The Docker Engine
+
+It exposes an API, it interfaces with all the kernel magic, and out pop containers. 
+
+<img src="https://github.com/KiraDiShira/Docker/blob/master/ArchitectureAndTheory/Images/aat4.PNG" />
+
+<img src="https://github.com/KiraDiShira/Docker/blob/master/ArchitectureAndTheory/Images/aat5.PNG" />
