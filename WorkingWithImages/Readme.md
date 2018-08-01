@@ -102,3 +102,25 @@ Then any other line that's got a non zero value at the end here will have create
 
 
 So, a bunch of layers with files and stuff in them. Stacked on top of each other and unified by a storage driver according to instructions in a manifest. Then, we start containers from them. Multiple per image if we want.
+
+## Registries
+
+Images live in registries. 
+
+When we pull one to our docker host, we are pulling it from a registry. Docker defaults to using **Docker Hub**.
+
+When you pull an image to your local host, I suppose we could say it gets pulled to a local registry. On Linux, that's under var lib docker and then the name of your storage driver. On Windows, it's under c program data docker Windows filter.
+
+<img src="https://github.com/KiraDiShira/Docker/blob/master/WorkingWithImages/Images/wwi10.PNG" />
+
+So, images live in registries. 
+
+Image naming's important. The easiest images to address are the official ones. So, basically, Docker Hub's got this notion of **official images** and **unofficial images**. 
+
+<img src="https://github.com/KiraDiShira/Docker/blob/master/WorkingWithImages/Images/wwi11.PNG" />
+
+Now then, I need to circle back a bit and talk about hashes and digests again 'cause there's a bit of a quirk when it comes to registries. So, walking through the process of pushing an image to a registry. Well, first off, right, there's no such thing as an image, remember? It's a bunch of independent layers with a config file that loosely couples them. Anyway, we've got layers containing data and for each one we compute its content hash that we use as its ID. And I want to be clear, we call this a **content hash**.
+
+Okay, now then, when we push an image to a registry, we do a couple of things, we create a manifest that defines the image, you know, what layers are in it, yeah, and we push the manifest and layers independently but when we push the layers, we compress them. Okay, that's normal when we're hauling stuff over the internet. Remember, the layer IDs are content hashes and compressing a layer, changes its content. So when they arrive at the registry and a hash is computed to verify integrity, we'll get a fail, they won't match. So, to get around this, when we build the manifest that will push to the registry, we populate it with new hashes of the compressed layers.
+
+So, on the host, we've got the uncompressed layers and their content hashes. Over the wire and in the registry's blob store, we've got compressed layers and what we're calling **distribution hashes**. That way, the compressed layers and manifest get pushed to the registry and the registry uses the distribution hashes to verify that everything arrived as it should.
