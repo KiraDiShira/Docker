@@ -123,3 +123,27 @@ docker image inspect psweb
 ```
 
 <img src="https://github.com/KiraDiShira/Docker/blob/master/ContainerizingAnApp/Images/caa5.PNG" />
+
+## Multi-stage Builds
+
+I am hoping by now that it is abundantly clear that size matters when it comes to images. And smaller is definitely better. So, with smaller images, we're talking about things like faster builds, faster deployments, less money wasted on storage, and less attack surface for the bad guys to aim at. 
+
+So, running our apps with a minimal OS and minimal supporting packages, that is the gold standard. 
+
+Small, small images is what we're aiming for.
+
+The problem is that we start out with a pretty big image. You know, one that's got a shedload of packages and build tools that, who knows? Maybe we'll need them. But maybe we won't. Then we copy in a bunch more tools that we know we need. We throw in our app code, and then we do the build. And the image is huge! And this is where it falls apart, right? Then we ship it to production with all the build stuff left in! I mean, it's crazy! 
+
+**Multi-stage builds** to the rescue. This here, what we're talking about now, is official support to technology from the core Docker project. We're talking a single Dockerfile and zero scripting wizardry.
+
+<img src="https://github.com/KiraDiShira/Docker/blob/master/ContainerizingAnApp/Images/caa6.PNG" />
+
+The main thing to note is that we have got multiple `FROM` instructions, three in this example. Each one marks a distinct **build stage**. So, internally, right, they're numbered from zero at the top. But even better, we can give them friendly names. So, stage zero here is storefront, and stage one here is appserver. And then the last stage, production. 
+
+<img src="https://github.com/KiraDiShira/Docker/blob/master/ContainerizingAnApp/Images/caa7.PNG" />
+
+Stage zero of the build here takes a giant image, great for building, okay? Not so great for production. Well, it builds some app code and it spits out even bigger image. Stage one is the same. Pulls a big image, adds some stuff in, throws out an even bigger one. At this point in the build, we've got four images, and inside of them, we have got a boatload of build time machinery, but just a small amount of production code. 
+
+```
+docker image build -t multistage .
+```
